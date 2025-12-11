@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="001-create-package-table" author="developer">
+        <createTable tableName="package">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="arrival_for_delivery_at" type="TIMESTAMP"/>
+            <column name="arrival_for_pickup_at" type="TIMESTAMP"/>
+            <column name="cancel_reason" type="VARCHAR(255)"/>
+            <column name="cancelled" type="BOOLEAN">
+                <constraints nullable="false" />
+            </column>
+            <column name="completed_at" type="TIMESTAMP"/>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="customer_id" type="BIGINT"/>
+            <column name="in_delivery_at" type="TIMESTAMP"/>
+            <column name="last_updated_at" type="TIMESTAMP"/>
+            <column name="eta" type="INT"/>
+            <column name="status" type="VARCHAR(50)"/>
+            <column name="store_id" type="BIGINT"/>
+            <column name="origin_address_id" type="BIGINT"/>
+            <column name="type" type="VARCHAR(50)"/>
+            <column name="waiting_for_assignment_at" type="TIMESTAMP"/>
+            <column name="user_id" type="BIGINT"/>
+            <column name="collected" type="INT"/>
+            <column name="collected_at" type="TIMESTAMP"/>
+            <column name="cancelled_at" type="TIMESTAMP"/>
+            <column name="picked_up_at" type="TIMESTAMP"/>
+            <column name="reassigned" type="INT"/>
+            <column name="order_id" type="BIGINT"/>
+            <column name="delivery_date" type="DATE"/>
+        </createTable>
+
+        <createIndex tableName="package" indexName="idx_package_status">
+            <column name="status"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="002-insert-sample-data" author="developer">
+
+        <!-- Sample 1: COMPLETED - Order delivered ON TIME -->
+        <insert tableName="package">
+            <column name="id" value="19604181"/>
+            <column name="arrival_for_delivery_at" value="2021-11-13 11:05:58.045640"/>
+            <column name="arrival_for_pickup_at" value="2021-11-13 10:48:37.032078"/>
+            <column name="cancelled" value="false"/>
+            <column name="completed_at" value="2021-11-13 11:40:15.314340"/>
+            <column name="created_at" value="2021-11-13 10:47:52.675248"/>
+            <column name="customer_id" value="20002011575015"/>
+            <column name="in_delivery_at" value="2021-11-13 11:05:56.861614"/>
+            <column name="last_updated_at" value="2021-11-13 11:40:15.314340"/>
+            <column name="eta" value="277"/>
+            <column name="status" value="COMPLETED"/>
+            <column name="store_id" value="20000000004103"/>
+            <column name="origin_address_id" value="999000020443388"/>
+            <column name="type" value="REGULAR"/>
+            <column name="waiting_for_assignment_at" value="2021-11-13 10:47:52.675248"/>
+            <column name="user_id" value="50002010395213"/>
+            <column name="collected" value="1"/>
+            <column name="collected_at" value="2021-11-13 10:47:52.828692"/>
+            <column name="picked_up_at" value="2021-11-13 10:49:50.278087"/>
+            <column name="order_id" value="123972783"/>
+            <column name="delivery_date" value="2021-11-13"/>
+        </insert>
+
+        <!-- Sample 2: CANCELLED -->
+        <insert tableName="package">
+            <column name="id" value="19604182"/>
+            <column name="arrival_for_pickup_at" value="2021-11-13 11:00:00.000000"/>
+            <column name="cancel_reason" value="Customer requested cancellation"/>
+            <column name="cancelled" value="true"/>
+            <column name="created_at" value="2021-11-13 10:55:00.000000"/>
+            <column name="customer_id" value="20002011575016"/>
+            <column name="last_updated_at" value="2021-11-13 11:10:00.000000"/>
+            <column name="eta" value="300"/>
+            <column name="status" value="CANCELLED"/>
+            <column name="store_id" value="20000000004103"/>
+            <column name="origin_address_id" value="999000020443389"/>
+            <column name="type" value="REGULAR"/>
+            <column name="waiting_for_assignment_at" value="2021-11-13 10:55:00.000000"/>
+            <column name="user_id" value="50002010395214"/>
+            <column name="collected" value="0"/>
+            <column name="cancelled_at" value="2021-11-13 11:10:00.000000"/>
+            <column name="order_id" value="123972784"/>
+            <column name="delivery_date" value="2021-11-13"/>
+        </insert>
+
+        <!-- Sample 3: IN_DELIVERY -->
+        <insert tableName="package">
+            <column name="id" value="19604183"/>
+            <column name="arrival_for_pickup_at" value="2021-11-13 12:00:00.000000"/>
+            <column name="cancelled" value="false"/>
+            <column name="created_at" value="2021-11-13 11:50:00.000000"/>
+            <column name="customer_id" value="20002011575017"/>
+            <column name="in_delivery_at" value="2021-11-13 12:15:00.000000"/>
+            <column name="last_updated_at" value="2021-11-13 12:15:00.000000"/>
+            <column name="eta" value="250"/>
+            <column name="status" value="IN_DELIVERY"/>
+            <column name="store_id" value="20000000004103"/>
+            <column name="origin_address_id" value="999000020443390"/>
+            <column name="type" value="EXPRESS"/>
+            <column name="waiting_for_assignment_at" value="2021-11-13 11:50:00.000000"/>
+            <column name="user_id" value="50002010395215"/>
+            <column name="collected" value="1"/>
+            <column name="collected_at" value="2021-11-13 11:55:00.000000"/>
+            <column name="picked_up_at" value="2021-11-13 12:05:00.000000"/>
+            <column name="order_id" value="123972785"/>
+            <column name="delivery_date" value="2021-11-13"/>
+        </insert>
+
+        <!-- Sample 4: WAITING_FOR_ASSIGNMENT -->
+        <insert tableName="package">
+            <column name="id" value="19604184"/>
+            <column name="cancelled" value="false"/>
+            <column name="created_at" value="2021-11-13 13:00:00.000000"/>
+            <column name="customer_id" value="20002011575018"/>
+            <column name="last_updated_at" value="2021-11-13 13:00:00.000000"/>
+            <column name="eta" value="60"/>
+            <column name="status" value="WAITING_FOR_ASSIGNMENT"/>
+            <column name="store_id" value="20000000004103"/>
+            <column name="origin_address_id" value="999000020443391"/>
+            <column name="type" value="REGULAR"/>
+            <column name="waiting_for_assignment_at" value="2021-11-13 13:00:00.000000"/>
+            <column name="user_id" value="50002010395216"/>
+            <column name="collected" value="0"/>
+            <column name="order_id" value="123972786"/>
+            <column name="delivery_date" value="2021-11-13"/>
+        </insert>
+
+        <!-- Sample 5: COLLECTED -->
+        <insert tableName="package">
+            <column name="id" value="19604185"/>
+            <column name="arrival_for_pickup_at" value="2021-11-13 13:25:00.000000"/>
+            <column name="cancelled" value="false"/>
+            <column name="created_at" value="2021-11-13 13:10:00.000000"/>
+            <column name="customer_id" value="20002011575019"/>
+            <column name="last_updated_at" value="2021-11-13 13:25:00.000000"/>
+            <column name="eta" value="90"/>
+            <column name="status" value="COLLECTED"/>
+            <column name="store_id" value="20000000004103"/>
+            <column name="origin_address_id" value="999000020443392"/>
+            <column name="type" value="EXPRESS"/>
+            <column name="waiting_for_assignment_at" value="2021-11-13 13:10:00.000000"/>
+            <column name="user_id" value="50002010395217"/>
+            <column name="collected" value="1"/>
+            <column name="collected_at" value="2021-11-13 13:25:00.000000"/>
+            <column name="order_id" value="123972787"/>
+            <column name="delivery_date" value="2021-11-13"/>
+        </insert>
+
+        <!-- Sample 6: PICKED_UP -->
+        <insert tableName="package">
+            <column name="id" value="19604186"/>
+            <column name="arrival_for_pickup_at" value="2021-11-13 13:40:00.000000"/>
+            <column name="cancelled" value="false"/>
+            <column name="created_at" value="2021-11-13 13:30:00.000000"/>
+            <column name="customer_id" value="20002011575020"/>
+            <column name="last_updated_at" value="2021-11-13 13:45:00.000000"/>
+            <column name="eta" value="120"/>
+            <column name="status" value="PICKED_UP"/>
+            <column name="store_id" value="20000000004103"/>
+            <column name="origin_address_id" value="999000020443393"/>
+            <column name="type" value="REGULAR"/>
+            <column name="waiting_for_assignment_at" value="2021-11-13 13:30:00.000000"/>
+            <column name="user_id" value="50002010395218"/>
+            <column name="collected" value="1"/>
+            <column name="collected_at" value="2021-11-13 13:35:00.000000"/>
+            <column name="picked_up_at" value="2021-11-13 13:45:00.000000"/>
+            <column name="order_id" value="123972788"/>
+            <column name="delivery_date" value="2021-11-13"/>
+        </insert>
+
+        <!-- Sample 7: COMPLETED - Order delivered LATE (orderInTime = false) -->
+        <insert tableName="package">
+            <column name="id" value="19604187"/>
+            <column name="arrival_for_delivery_at" value="2021-11-13 15:30:00.000000"/>
+            <column name="arrival_for_pickup_at" value="2021-11-13 14:10:00.000000"/>
+            <column name="cancelled" value="false"/>
+            <column name="completed_at" value="2021-11-13 16:00:00.000000"/>
+            <column name="created_at" value="2021-11-13 14:00:00.000000"/>
+            <column name="customer_id" value="20002011575021"/>
+            <column name="in_delivery_at" value="2021-11-13 15:30:00.000000"/>
+            <column name="last_updated_at" value="2021-11-13 16:00:00.000000"/>
+            <column name="eta" value="45"/>
+            <column name="status" value="COMPLETED"/>
+            <column name="store_id" value="20000000004103"/>
+            <column name="origin_address_id" value="999000020443394"/>
+            <column name="type" value="EXPRESS"/>
+            <column name="waiting_for_assignment_at" value="2021-11-13 14:00:00.000000"/>
+            <column name="user_id" value="50002010395219"/>
+            <column name="collected" value="1"/>
+            <column name="collected_at" value="2021-11-13 14:05:00.000000"/>
+            <column name="picked_up_at" value="2021-11-13 14:15:00.000000"/>
+            <column name="order_id" value="123972789"/>
+            <column name="delivery_date" value="2021-11-13"/>
+        </insert>
+
+        <!-- Sample 8: COMPLETED - Null ETA (edge case) -->
+        <insert tableName="package">
+            <column name="id" value="19604188"/>
+            <column name="arrival_for_delivery_at" value="2021-11-13 17:00:00.000000"/>
+            <column name="arrival_for_pickup_at" value="2021-11-13 16:30:00.000000"/>
+            <column name="cancelled" value="false"/>
+            <column name="completed_at" value="2021-11-13 17:30:00.000000"/>
+            <column name="created_at" value="2021-11-13 16:15:00.000000"/>
+            <column name="customer_id" value="20002011575022"/>
+            <column name="in_delivery_at" value="2021-11-13 17:00:00.000000"/>
+            <column name="last_updated_at" value="2021-11-13 17:30:00.000000"/>
+            <column name="status" value="COMPLETED"/>
+            <column name="store_id" value="20000000004103"/>
+            <column name="origin_address_id" value="999000020443395"/>
+            <column name="type" value="REGULAR"/>
+            <column name="waiting_for_assignment_at" value="2021-11-13 16:15:00.000000"/>
+            <column name="user_id" value="50002010395220"/>
+            <column name="collected" value="1"/>
+            <column name="collected_at" value="2021-11-13 16:20:00.000000"/>
+            <column name="picked_up_at" value="2021-11-13 16:35:00.000000"/>
+            <column name="order_id" value="123972790"/>
+            <column name="delivery_date" value="2021-11-13"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>
