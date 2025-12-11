@@ -46,6 +46,7 @@ class AppApplicationTests {
     @Autowired
     private PackageRepository packageRepository;
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private EmbeddedKafkaBroker embeddedKafkaBroker;
 
