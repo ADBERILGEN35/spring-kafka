@@ -1,4 +1,4 @@
-package com.startupheroes.app.dto;
+package com.startupheroes.app.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
