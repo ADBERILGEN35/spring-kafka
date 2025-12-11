@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: package-kafka
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/packagedb
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+
+  kafka:
+    bootstrap-servers: localhost:29092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    template:
+      default-topic: package-events
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    com.startupheroes.app: DEBUG
+    org.springframework.kafka: INFO
