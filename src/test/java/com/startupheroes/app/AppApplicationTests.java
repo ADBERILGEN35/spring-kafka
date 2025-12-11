@@ -38,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @EmbeddedKafka(partitions = 1, topics = {"package-events-test"})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class CaseApplicationTests {
+class AppApplicationTests {
 
     @Autowired
     private MockMvc mockMvc;
