@@ -24,10 +24,13 @@ Bu proje, PostgreSQL'deki Package kayıtlarını işleyip Kafka'ya yayımlayan b
 git clone https://github.com/ADBERILGEN35/spring-kafka.git
 ```
 ```bash
-cd package-kafka-case
+cd spring-kafka
 ```
 ###  2. Testleri Çalıştır
 
+```bash
+chmod +x gradlew
+```
 ```bash
 ./gradlew clean test
 ```
@@ -124,7 +127,7 @@ curl -X POST http://localhost:8080/kafka/bootstrap
 }
 ```
 
-> **Not:** Veritabanında 8 kayıt vardır ancak 1 tanesi `cancelled=true` olduğu için sonuç **7** döner.
+> **Not:** Veritabanında 8 kayıt vardır ancak 1 tanesi `cancelled=true` olduğu için sonuç **7 kayıt** döner.
 
 ---
 
@@ -376,4 +379,4 @@ Aşağıdaki alanlar **null** olarak döner:
 ---
 
 
-**© 2025 StartupHeroes - Package Kafka Case Study**
+**© 2025 Startup Heroes - Package Kafka Case Study**
